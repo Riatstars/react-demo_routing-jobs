@@ -6,9 +6,10 @@ import jobs from "./jobs.json"
 import JobCard from './components/JobCard1';
 import Pagination from '@mui/material/Pagination';
 import { ThemeProvider } from '@emotion/react';
+import { useNavigate } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
-import { OpenInNew } from '@mui/icons-material';
-import { Outlet, redirect } from 'react-router-dom';
+
 
 
 const theme = createTheme({
@@ -26,30 +27,32 @@ const theme = createTheme({
 export const  ModalContext = createContext()
 
 function App() {
+  
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [open, setOpen] = useState(false);
     const handleOpen = ()=>setOpen(true);
     const handleClose = () => {
       setOpen(false)
-      redirect('/')
+      navigate("/",{replace:true})
     };
+
+    const navigate = useNavigate();
   
   return(
   <ThemeProvider theme={theme}>
     <Box sx={{
       bgcolor: "secondary.main"
     }} style={{}}>
-    <PrimarySearchAppBar/>
+    <PrimarySearchAppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
     <Container style={{}} maxWidth="lg">
 
       <Grid style={{marginTop:"1rem",display: "flex"}} container spacing={2}>
-        {jobs.jobs.slice(0,5)?.map(job=> (
+        {jobs.jobs.slice(0,6)?.map(job=> (
         <Grid  key={job.id} item xs={12} md={4}>
           <JobCard  job={job} isLoggedIn={isLoggedIn} handleOpen={handleOpen}/>
         </Grid>
         ))}
-        {console.log(jobs)}
         
       </Grid>
 
@@ -62,9 +65,8 @@ function App() {
     </Container>
 
     </Box>
-    <ModalContext.Provider value={[open, handleClose]}>
-    <Outlet/>
-
+    <ModalContext.Provider value={[open, handleClose, setIsLoggedIn]}>
+      <Outlet/>
     </ModalContext.Provider>
     
 

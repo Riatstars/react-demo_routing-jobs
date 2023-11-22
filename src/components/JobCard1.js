@@ -34,8 +34,8 @@ function JobCard({job,isLoggedIn,handleOpen}) {
         <p>Salary Range: ${job.salaryLow} - ${job.salaryHigh}</p>
         
         <LinesEllipsis
-        text={`Job Description: ${job.description}...`}
-        maxLine='3  '
+        text={`Job Description: ${job.description}`}
+        maxLine='4    '
         ellipsis='...'
         trimRight
         basedOn='letters'/>

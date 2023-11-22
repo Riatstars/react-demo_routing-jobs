@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
+export default function PrimarySearchAppBar({isLoggedIn}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -65,11 +65,6 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const navigate = useNavigate();
-  const handleSignOut = ()=>{
-    setIsLoggedIn(false)
-    navigate("/",{replace:true})
-
-  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -220,7 +215,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
                   aria-controls="primary-search-account-menu"
                   aria-haspopup="true"
                   color="inherit"
-                  onClick={ ()=> handleSignOut}
+                  // onClick={navigate("/sign-in",{replace:true})}
                 >
                   <AccountCircle />
                 </IconButton>
@@ -236,7 +231,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
                   aria-controls="primary-search-account-menu"
                   aria-haspopup="true"
                   color="inherit"
-                  onClick={()=>navigate("/sign-in",{replace:true})}
+                  // onClick={navigate("/sign-in",{replace:true})}
                 >
                   <AccountCircle />
                 </IconButton>
