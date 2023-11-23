@@ -64,12 +64,13 @@ function App() {
 
       <Grid style={{marginTop:"1rem",display: "flex"}} container spacing={2}>
         {jobs.jobs.slice(pagination.from,pagination.to)?.map(job=> (
-        <Grid  key={job.id} item xs={12} md={4}>
+        <Grid key={job.id}   item xs={12} md={4}>
           <JobCard  job={job} isLoggedIn={isLoggedIn} handleOpen={handleOpen}/>
         </Grid>
         ))}
         
       </Grid>
+      {console.log(jobs)}
 
       <Grid style={{marginTop:"1rem",display:'flex'}} item xs={12} md={12}>
         <Pagination 

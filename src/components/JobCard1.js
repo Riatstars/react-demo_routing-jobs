@@ -25,7 +25,7 @@ function JobCard({job,isLoggedIn,handleOpen}) {
         <div style={{display:"flex",flexWrap:"wrap"}}>
           
         {job.skills?.slice(0,4).map(skill=> {
-          return (<Chip size="small" label={skill} />)
+          return (<Chip key={job.id+skill} size="small" label={skill} />)
         })}
 
         </div>

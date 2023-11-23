@@ -1,7 +1,10 @@
-import { Box, Button, Fade, Modal, Typography } from '@mui/material'
+import { Box, Chip, Divider, Fade, Modal, Typography } from '@mui/material'
 import React, { useContext } from 'react'
 import Backdrop from '@mui/material/Backdrop';
 import { ModalContext } from '../App';
+import { useParams } from 'react-router-dom';
+import data from "../jobs.json"
+
 
 const style = {
   position: 'absolute',
@@ -15,11 +18,21 @@ const style = {
   p: 4,
 };
 
+ function getJobInfo (id){
+  return data.jobs?.find((job)=>job.id === id)
+ }
+ function getCompanyInfo(id){
+  return data.companies?.find((company)=> company.id === id)
+ }
  
 
 function JobInfoModal() {
     const open = useContext(ModalContext)[0]
     const handleClose = useContext(ModalContext)[1]
+    let params = useParams()
+    const jobInfo = getJobInfo(params.jobId)
+    const companyInfo = getCompanyInfo(jobInfo.companyId)
+
   return (
     <div>
       <Modal
@@ -38,11 +51,25 @@ function JobInfoModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Job Info
+              {jobInfo.city}: {jobInfo.title}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              {jobInfo.description}
             </Typography>
+            <Divider style={{margin: "1rem"}} />
+            {jobInfo.skills?.slice(0,4).map(skill=> {
+          return (<Chip key={skill} size="small" label={skill} />)
+        })}
+            <Divider style={{margin: "1rem"}} />
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              Company: {companyInfo.name}
+              
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              Hiring Positions:{companyInfo.numOfJobs}
+              
+            </Typography>
+
           </Box>
         </Fade>
       </Modal>

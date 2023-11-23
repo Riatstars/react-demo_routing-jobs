@@ -220,7 +220,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
                   aria-controls="primary-search-account-menu"
                   aria-haspopup="true"
                   color="inherit"
-                  // onClick={handleSignOut}
+                  onClick={handleSignOut}
                 >
                   <AccountCircle />
                 </IconButton>
