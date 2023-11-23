@@ -38,7 +38,22 @@ function App() {
     };
 
     const navigate = useNavigate();
-  
+
+    const jobsNumber = jobs.jobs.length
+
+    const [paginationControl, setPaginationControl] = useState({
+      jobsPerPage: 9,
+      currentPage: 1
+    })
+    const pagination={
+      totalPages: Math.ceil(jobsNumber/paginationControl.jobsPerPage),
+      from: (paginationControl.currentPage-1)*paginationControl.jobsPerPage,
+      to: ((paginationControl.currentPage)*paginationControl.jobsPerPage > jobsNumber)? jobsNumber :(paginationControl.currentPage)*paginationControl.jobsPerPage
+    }
+    const handlePagination = (event,value)=>{
+      setPaginationControl({...paginationControl,currentPage: value})
+    }
+
   return(
   <ThemeProvider theme={theme}>
     <Box sx={{
@@ -48,7 +63,7 @@ function App() {
     <Container style={{}} maxWidth="lg">
 
       <Grid style={{marginTop:"1rem",display: "flex"}} container spacing={2}>
-        {jobs.jobs.slice(0,6)?.map(job=> (
+        {jobs.jobs.slice(pagination.from,pagination.to)?.map(job=> (
         <Grid  key={job.id} item xs={12} md={4}>
           <JobCard  job={job} isLoggedIn={isLoggedIn} handleOpen={handleOpen}/>
         </Grid>
@@ -59,7 +74,9 @@ function App() {
       <Grid style={{marginTop:"1rem",display:'flex'}} item xs={12} md={12}>
         <Pagination 
         style={{color:"black",width:"100%",justifyContent:"center", display:"flex"}} 
-        count={10}  
+        count={pagination.totalPages}  
+        page={paginationControl.currentPage}
+        onChange={handlePagination}
         color="secondary" />
       </Grid>
     </Container>
