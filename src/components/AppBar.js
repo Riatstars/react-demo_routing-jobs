@@ -11,10 +11,9 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MoreIcon from '@mui/icons-material/MoreVert';
 
 
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -57,7 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
+export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn,handleOpen}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -70,10 +69,12 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
     navigate("/",{replace:true})
 
   }
+  const handleOpenSignInModal = ()=>{
+    handleOpen()
+    navigate("/sign-in" ,{replace:true})
+  }
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -84,9 +85,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -236,7 +235,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
                   aria-controls="primary-search-account-menu"
                   aria-haspopup="true"
                   color="inherit"
-                  // onClick={navigate("/sign-in",{replace:true})}
+                  onClick={handleOpenSignInModal}
                 >
                   <AccountCircle />
                 </IconButton>

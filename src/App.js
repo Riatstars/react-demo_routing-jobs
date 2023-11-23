@@ -59,7 +59,7 @@ function App() {
     <Box sx={{
       bgcolor: "secondary.main"
     }} style={{}}>
-    <PrimarySearchAppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+    <PrimarySearchAppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} handleOpen={handleOpen}/>
     <Container style={{}} maxWidth="lg">
 
       <Grid style={{marginTop:"1rem",display: "flex"}} container spacing={2}>
