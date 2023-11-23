@@ -206,7 +206,7 @@ export default function PrimarySearchAppBar({isLoggedIn,setIsLoggedIn}) {
                   aria-controls="primary-search-account-menu"
                   aria-haspopup="true"
                   color="inherit"
-                  // onClick={navigate("/sign-in",{replace:true})}
+                  // onClick={}
                 >
                   <AccountCircle />
                 </IconButton>
