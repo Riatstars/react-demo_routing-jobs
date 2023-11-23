@@ -5,7 +5,7 @@ import { ModalContext } from '../App';
 import Backdrop from '@mui/material/Backdrop';
 
 import {useForm} from "react-hook-form"
-import { VisibilityOff,Visibility, CheckBox } from '@mui/icons-material';
+import { VisibilityOff,Visibility} from '@mui/icons-material';
 import {FormProvider,FCheckBox,FTextField} from "./form"
 
 const style = {
@@ -36,10 +36,8 @@ function SignInModal() {
   }
   const methods = useForm({defaultValues})
   const {
-    reset,
     setError,
     handleSubmit,
-    control,
     formState: {errors, isSubmitting}
   } = methods
   
